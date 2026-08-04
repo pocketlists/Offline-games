@@ -1,0 +1,42 @@
+
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Top 20 Offline Mobile Games</title>
+<style>
+body{margin:0;font-family:Arial;background:#0f172a;color:#fff}
+header{padding:24px;text-align:center;background:#111827;position:sticky;top:0}
+#search{width:90%;max-width:500px;padding:12px;border-radius:8px;border:0}
+.grid{max-width:1000px;margin:auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:#1e293b;padding:16px;border-radius:12px}
+.badge{display:inline-block;background:#16a34a;padding:4px 8px;border-radius:99px;font-size:12px}
+.btn{display:inline-block;margin-top:10px;background:#2563eb;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px}
+.ad{margin:16px;background:#fff;color:#000;padding:16px;text-align:center;border-radius:10px}
+</style></head><body>
+<header><h1>🎮 Top 20 Offline Mobile Games</h1><input id="search" placeholder="Search games..."></header>
+<div class="ad">PASTE YOUR ADSTERRA CODE HERE</div>
+<div class="grid" id="games"></div>
+<div class="ad">PASTE YOUR SECOND ADSTERRA CODE HERE</div>
+<script>
+const games=[
+["Alto's Odyssey","https://play.google.com/store/apps/details?id=com.noodlecake.altosodyssey"],
+["Temple Run 2","https://play.google.com/store/apps/details?id=com.imangi.templerun2"],
+["Subway Surfers","https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf"],
+["Reckless Getaway 2","https://play.google.com/store/apps/details?id=com.pixelbite.ga2"],
+["Human: Fall Flat","https://play.google.com/store/apps/details?id=com.and.games505.humanfallflat"],
+["Smashy Road: Wanted 2","#"],["Sky Force Reloaded","https://play.google.com/store/apps/details?id=pl.idreams.SkyForceReloaded2016"],
+["Death Road to Canada","https://play.google.com/store/apps/details?id=com.noodlecake.drtc"],
+["Bully: Anniversary Edition","https://play.google.com/store/apps/details?id=com.rockstargames.bully"],
+["Hill Climb Racing 2","https://play.google.com/store/apps/details?id=com.fingersoft.hcr2"],
+["Bloons TD 6","https://play.google.com/store/apps/details?id=com.ninjakiwi.bloonstd6"],
+["Vampire Survivors","https://play.google.com/store/apps/details?id=com.poncle.vampiresurvivors"],
+["Terraria","https://play.google.com/store/apps/details?id=com.and.games505.TerrariaPaid"],
+["Minecraft","https://play.google.com/store/apps/details?id=com.mojang.minecraftpe"],
+["Plague Inc.","https://play.google.com/store/apps/details?id=com.miniclip.plagueinc"],
+["Stardew Valley","https://play.google.com/store/apps/details?id=com.chucklefish.stardewvalley"],
+["Cat Quest","#"],["Dead Cells","https://play.google.com/store/apps/details?id=com.playdigious.deadcells.mobile"],
+["GTA: Vice City","https://play.google.com/store/apps/details?id=com.rockstargames.gtavc"],
+["Danganronpa: Trigger Happy Havoc","https://play.google.com/store/apps/details?id=jp.co.spike_chunsoft.DR1"]];
+const c=document.getElementById('games');
+function render(f=""){c.innerHTML="";games.filter(g=>g[0].toLowerCase().includes(f.toLowerCase())).forEach((g,i)=>{c.innerHTML+=`<div class=card><h3>#${i+1} ${g[0]}</h3><span class=badge>Offline</span><br><a class=btn href="${g[1]}" target=_blank>Download</a></div>`})}
+render();
+search.oninput=e=>render(e.target.value);
+</script></body></html>
