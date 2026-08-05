@@ -1,42 +1,305 @@
-
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Top 20 Offline Mobile Games</title>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No Signal — 20 Best Offline Mobile Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:Arial;background:#0f172a;color:#fff}
-header{padding:24px;text-align:center;background:#111827;position:sticky;top:0}
-#search{width:90%;max-width:500px;padding:12px;border-radius:8px;border:0}
-.grid{max-width:1000px;margin:auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.card{background:#1e293b;padding:16px;border-radius:12px}
-.badge{display:inline-block;background:#16a34a;padding:4px 8px;border-radius:99px;font-size:12px}
-.btn{display:inline-block;margin-top:10px;background:#2563eb;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px}
-.ad{margin:16px;background:#fff;color:#000;padding:16px;text-align:center;border-radius:10px}
-</style></head><body>
-<header><h1>🎮 Top 20 Offline Mobile Games</h1><input id="search" placeholder="Search games..."></header>
-<div class="ad">PASTE YOUR ADSTERRA CODE HERE</div>
-<div class="grid" id="games"></div>
-<div class="ad">PASTE YOUR SECOND ADSTERRA CODE HERE</div>
+  :root{
+    --bg:#14161C;
+    --surface:#1C1F29;
+    --surface-2:#242835;
+    --line:#2E3240;
+    --amber:#FFB238;
+    --teal:#5EC8C0;
+    --text:#EDEEF2;
+    --muted:#8B8FA3;
+    --danger:#FF6B5E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:repeating-linear-gradient(180deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+
+  header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(20,22,28,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1180px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;letter-spacing:0.02em;}
+  .bars{display:flex;align-items:flex-end;gap:2px;height:16px;}
+  .bars span{width:3px;background:var(--muted);display:block;}
+  .bars span:nth-child(1){height:30%;}
+  .bars span:nth-child(2){height:55%;}
+  .bars span:nth-child(3){height:75%;}
+  .bars span:nth-child(4){height:100%;}
+  .bars.off span{background:var(--danger);}
+  .brand small{display:block;font-size:0.62rem;color:var(--muted);font-weight:500;letter-spacing:0.08em;}
+
+  .yt-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--danger);color:#fff;
+    padding:9px 16px;border-radius:999px;
+    font-weight:600;font-size:0.85rem;
+    white-space:nowrap;
+    transition:transform .15s ease;
+  }
+  .yt-btn:hover{transform:translateY(-1px);}
+
+  .hero{padding:64px 0 40px;text-align:center;position:relative;}
+  .hero .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--amber);font-size:0.78rem;font-weight:600;
+    letter-spacing:0.12em;text-transform:uppercase;
+    border:1px solid rgba(255,178,56,0.3);
+    padding:6px 14px;border-radius:999px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2rem, 5vw, 3.4rem);
+    font-weight:700;line-height:1.15;
+    letter-spacing:-0.01em;
+    max-width:820px;margin:0 auto 16px;
+  }
+  .hero h1 .accent{color:var(--amber);}
+  .hero p.sub{color:var(--muted);font-size:1.05rem;max-width:560px;margin:0 auto 34px;}
+
+  .search-box{max-width:480px;margin:0 auto;position:relative;}
+  .search-box input{
+    width:100%;background:var(--surface);border:1px solid var(--line);color:var(--text);
+    padding:15px 18px 15px 46px;border-radius:14px;font-size:0.95rem;font-family:inherit;
+    outline:none;transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--amber);}
+  .search-box input::placeholder{color:var(--muted);}
+  .search-box .icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1.1rem;}
+  .search-meta{margin-top:14px;color:var(--muted);font-size:0.82rem;}
+  .search-meta .mono{color:var(--teal);}
+
+  .ad-slot{max-width:1180px;margin:34px auto;padding:0 20px;}
+  .ad-slot .box{
+    border:1px dashed var(--line);border-radius:12px;color:var(--muted);
+    font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;
+    display:flex;align-items:center;justify-content:center;background:var(--surface);
+  }
+  .ad-banner{height:90px;}
+  .ad-native{padding:18px;height:110px;}
+  .ad-social{height:60px;}
+
+  .section-title{display:flex;align-items:baseline;justify-content:space-between;margin:8px 0 22px;flex-wrap:wrap;gap:10px;}
+  .section-title h2{font-size:1.3rem;font-weight:700;}
+  .section-title span{color:var(--muted);font-size:0.85rem;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;padding-bottom:20px;}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .18s ease, border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);border-color:rgba(255,178,56,0.35);}
+  .thumb{position:relative;height:120px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .thumb .rank{
+    position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:#fff;
+    background:rgba(0,0,0,0.55);padding:3px 8px;border-radius:6px;z-index:2;
+  }
+  .card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .card-body h3{font-size:1rem;font-weight:600;line-height:1.3;}
+  .card-body .genre{color:var(--muted);font-size:0.78rem;}
+
+  .badges{display:flex;flex-wrap:wrap;gap:6px;}
+  .badge{font-size:0.68rem;font-weight:600;padding:3px 8px;border-radius:6px;letter-spacing:0.02em;}
+  .badge.offline{background:rgba(94,200,192,0.14);color:var(--teal);}
+  .badge.free{background:rgba(120,200,120,0.14);color:#84D993;}
+  .badge.paid{background:rgba(255,178,56,0.14);color:var(--amber);}
+  .badge.rating{background:rgba(255,255,255,0.06);color:var(--text);}
+
+  .meta-row{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);margin-top:auto;}
+  .dl-btn{
+    margin-top:4px;display:block;text-align:center;background:var(--amber);color:#1a1305;
+    font-weight:700;font-size:0.82rem;padding:10px;border-radius:10px;transition:filter .15s ease;
+  }
+  .dl-btn:hover{filter:brightness(1.08);}
+  .dl-btn.steam{background:var(--surface-2);color:var(--text);border:1px solid var(--line);}
+
+  .empty-state{display:none;text-align:center;padding:60px 20px;color:var(--muted);}
+  .empty-state .bars{margin:0 auto 18px;justify-content:center;height:22px;}
+  .empty-state .bars span{width:4px;}
+
+  .about{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:32px;margin:50px 0;}
+  .about h2{font-size:1.2rem;margin-bottom:10px;}
+  .about p{color:var(--muted);font-size:0.92rem;max-width:680px;}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;}
+  .footer-inner{
+    max-width:1180px;margin:0 auto;padding:30px 20px 50px;display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:16px;color:var(--muted);font-size:0.8rem;
+  }
+  .footer-inner .bars{height:14px;}
+
+  @media (max-width:640px){
+    .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+    .thumb{height:130px;}
+    .hero{padding:44px 0 30px;}
+    .footer-inner{flex-direction:column;text-align:center;align-items:center;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <span class="bars off"><span></span><span></span><span></span><span></span></span>
+      <span>NO SIGNAL<small>OFFLINE GAMES GUIDE</small></span>
+    </div>
+    <a class="yt-btn" href="#" id="ytSubBtn">▶ Subscribe</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">✦ खुद खेल कर चुने गए 20 games</span>
+    <h1>जब <span class="accent">Internet ख़त्म</span> हो जाए,<br>तब भी बोरियत नहीं</h1>
+    <p class="sub">बिना WiFi, बिना data — ये 20 games पूरी तरह offline चलते हैं। Search करो और सीधा Play Store या Steam पर पहुँच जाओ।</p>
+    <div class="search-box">
+      <span class="icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Game का नाम टाइप करो… जैसे 'Temple Run'">
+    </div>
+    <div class="search-meta"><span class="mono" id="resultCount">20</span> games मिले</div>
+  </div>
+</section>
+
+<div class="ad-slot"><div class="box ad-banner">Adsterra Banner Ad — 728×90</div></div>
+
+<div class="wrap">
+  <div class="section-title">
+    <h2>पूरी लिस्ट</h2>
+    <span>रैंक 20 से 1 तक</span>
+  </div>
+
+  <div class="grid" id="gameGrid"></div>
+
+  <div class="empty-state" id="emptyState">
+    <span class="bars off"><span></span><span></span><span></span><span></span></span>
+    <p>कोई match नहीं मिला — spelling चेक करके फिर try करो।</p>
+  </div>
+
+  <div class="ad-slot" style="padding:0;margin:10px 0 30px;"><div class="box ad-native">Adsterra Native Ad Slot</div></div>
+
+  <div class="about">
+    <h2>ये list कैसे बनी?</h2>
+    <p>वीडियो में बताए गए सभी 20 games यहाँ हैं। Thumbnail, rating और download-count सीधे हर game की official Play Store / Steam listing से लिए गए हैं, ताकि जानकारी असली और up-to-date रहे। Download button भी सीधा उसी official page पर ले जाता है — कहीं और नहीं।</p>
+  </div>
+</div>
+
+<div class="ad-slot"><div class="box ad-social">Adsterra Social Bar Slot</div></div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="brand" style="margin-bottom:6px;">
+        <span class="bars off"><span></span><span></span><span></span><span></span></span>
+        <span>NO SIGNAL</span>
+      </div>
+      <div>हर हफ्ते नई offline-games list — YouTube पर subscribe करना मत भूलना।</div>
+    </div>
+    <div>© 2026 No Signal · सारे trademarks, icons और screenshots अपने-अपने owners (game publishers) के हैं</div>
+  </div>
+</footer>
+
 <script>
-const games=[
-["Alto's Odyssey","https://play.google.com/store/apps/details?id=com.noodlecake.altosodyssey"],
-["Temple Run 2","https://play.google.com/store/apps/details?id=com.imangi.templerun2"],
-["Subway Surfers","https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf"],
-["Reckless Getaway 2","https://play.google.com/store/apps/details?id=com.pixelbite.ga2"],
-["Human: Fall Flat","https://play.google.com/store/apps/details?id=com.and.games505.humanfallflat"],
-["Smashy Road: Wanted 2","#"],["Sky Force Reloaded","https://play.google.com/store/apps/details?id=pl.idreams.SkyForceReloaded2016"],
-["Death Road to Canada","https://play.google.com/store/apps/details?id=com.noodlecake.drtc"],
-["Bully: Anniversary Edition","https://play.google.com/store/apps/details?id=com.rockstargames.bully"],
-["Hill Climb Racing 2","https://play.google.com/store/apps/details?id=com.fingersoft.hcr2"],
-["Bloons TD 6","https://play.google.com/store/apps/details?id=com.ninjakiwi.bloonstd6"],
-["Vampire Survivors","https://play.google.com/store/apps/details?id=com.poncle.vampiresurvivors"],
-["Terraria","https://play.google.com/store/apps/details?id=com.and.games505.TerrariaPaid"],
-["Minecraft","https://play.google.com/store/apps/details?id=com.mojang.minecraftpe"],
-["Plague Inc.","https://play.google.com/store/apps/details?id=com.miniclip.plagueinc"],
-["Stardew Valley","https://play.google.com/store/apps/details?id=com.chucklefish.stardewvalley"],
-["Cat Quest","#"],["Dead Cells","https://play.google.com/store/apps/details?id=com.playdigious.deadcells.mobile"],
-["GTA: Vice City","https://play.google.com/store/apps/details?id=com.rockstargames.gtavc"],
-["Danganronpa: Trigger Happy Havoc","https://play.google.com/store/apps/details?id=jp.co.spike_chunsoft.DR1"]];
-const c=document.getElementById('games');
-function render(f=""){c.innerHTML="";games.filter(g=>g[0].toLowerCase().includes(f.toLowerCase())).forEach((g,i)=>{c.innerHTML+=`<div class=card><h3>#${i+1} ${g[0]}</h3><span class=badge>Offline</span><br><a class=btn href="${g[1]}" target=_blank>Download</a></div>`})}
-render();
-search.oninput=e=>render(e.target.value);
-</script></body></html>
+const games = [
+  {rank:20,name:"Alto's Odyssey",icon:"https://play-lh.googleusercontent.com/9URwm9Pyp4-hf73pD-4Ka9ZnMPLE8--iZ2wddsXm3I0AguLAdyotFkYUl_PPTIrWhHRjl-i-BIdpSicxCZPURbw=s300",genre:"Endless Sandboarding",price:"Free",rating:"4.7",downloads:"10M+",store:"playstore",id:"com.noodlecake.altosodyssey"},
+  {rank:19,name:"Temple Run 2",icon:"https://play-lh.googleusercontent.com/48yHWnGUQ5S8qgQ13CAtp0EOuPN23443EM7K_NG0HiX_icUINAbUPLJoVOuGSTy9zTIPIDJ9shcSVPhe-VHmCE0=s300",genre:"Endless Runner",price:"Free",rating:"4.1",downloads:"1B+",store:"playstore",id:"com.imangi.templerun2"},
+  {rank:18,name:"Subway Surfers",icon:"https://play-lh.googleusercontent.com/T7az9M7td7A24vOr7Jp3C9NG16kyWA1NnlUySyl_mbDV9BtlrFbxps5TD5DzT7kCBxpNeTbIIju2_aFN4xtFoYM=s300",genre:"Endless Runner",price:"Free",rating:"4.5",downloads:"1B+",store:"playstore",id:"com.kiloo.subwaysurf"},
+  {rank:17,name:"Reckless Getaway 2",icon:"https://play-lh.googleusercontent.com/3aHL3xbbQBkiz2z3bf7EidcRxvWFTBPbEtBRLGHlrha4Z3UsTDM850RdK14HAAMaS-QjcxCVa9jOcTNbuGGDeQ=s300",genre:"Top-Down Car Chase",price:"Free",rating:"4.3",downloads:"50M+",store:"playstore",id:"com.pixelbite.ga2"},
+  {rank:16,name:"Human: Fall Flat",icon:"https://play-lh.googleusercontent.com/nQD0aVi_iWnJS0Da_JHlG7BOVjW00JHkzAxI8Wvmyxun7OZv6vRbV4BKO4SdPloNN1QMJ_X6CL3RDK1MDWe8dg=s300",genre:"Physics Puzzle",price:"$4.99",rating:"3.7",downloads:"1M+",store:"playstore",id:"com.and.games505.humanfallflat"},
+  {rank:15,name:"Smashy Road: Wanted 2",icon:"https://play-lh.googleusercontent.com/c-cyyIsMn659H-p3XFezpj3wjkC9Z7XhmZIz-WiZuVGZyMWp7t_pGUdpS0_be_Qu8_9UewBqVxFtONQ4-GiwaQ=s300",genre:"Chase / Arcade",price:"Free",rating:"4.2",downloads:"10M+",store:"playstore",id:"com.rkgames.basisgame"},
+  {rank:14,name:"Sky Force Reloaded",icon:"https://play-lh.googleusercontent.com/-fCHbjQblqyEGGjieodVGoePLHt3JMi2stl_yrck7IDlmSMv_aPn3BT83DuC2rcDG6oaUtx5KCqovHyx_99FLA=s300",genre:"Bullet-Hell Shooter",price:"Free",rating:"4.4",downloads:"10M+",store:"playstore",id:"pl.idreams.SkyForceReloaded2016"},
+  {rank:13,name:"Death Road to Canada",icon:"https://play-lh.googleusercontent.com/RI0-pZFk09Hs3zV1qt7NtZmLSL3PPenvjAI63h8kZXQwpMbeuep9KJaPeu3aeUy3_V4ANEAP_9QdArdeGpW_sQ=s300",genre:"Roguelike Survival",price:"$9.99",rating:"3.9",downloads:"500K+",store:"playstore",id:"com.noodlecake.drtc"},
+  {rank:12,name:"Bully: Anniversary Edition",icon:"https://play-lh.googleusercontent.com/PIzZmUVhiDSR7VJhhRaDj8S8lMtj68qKHowwmkVf8Mr7yQ6uaYmusmBETKeJc0MoHTTPz_SUBbkFIoHiMfjJ=s300",genre:"Open World (free trial, then $6.99)",price:"$6.99",rating:"4.1",downloads:"5M+",store:"playstore",id:"com.rockstargames.bully"},
+  {rank:11,name:"Hill Climb Racing 2",icon:"https://play-lh.googleusercontent.com/txB7-bJOtbijarGbXMB4hMmwFM3Xp_zyR3esLFMBco2wIGsrodNow8_HZSjKNgHT3GhPdBunMf6Fu_kJmwe57g=s300",genre:"Physics Racing",price:"Free",rating:"4.3",downloads:"100M+",store:"playstore",id:"com.fingersoft.hcr2"},
+  {rank:10,name:"Bloons TD 6",icon:"https://play-lh.googleusercontent.com/4te8y2It_nyY4yX5jcSEFaTDro98302l9EnSbkJyCobGUo8GWxteV_8kJ8nlXyStxw=s300",genre:"Tower Defense",price:"$6.99",rating:"4.8",downloads:"5M+",store:"playstore",id:"com.ninjakiwi.bloonstd6"},
+  {rank:9,name:"Vampire Survivors",icon:"https://play-lh.googleusercontent.com/R1dShZj1HNBQzrHhsAD9_F8BRc2FU-nlDMU7OIAIwnMge04QWvNZR-clnXnEd_v30Qo=s300",genre:"Survival Roguelite",price:"Free",rating:"4.5",downloads:"5M+",store:"playstore",id:"com.poncle.vampiresurvivors"},
+  {rank:8,name:"Terraria",icon:"https://play-lh.googleusercontent.com/47ylywbi2wh_pogL2XorXhg5HEbRDW1k_IqacSd3_2t-6sh7PIniak-k2lhTE0Y360TmO0coyJ7U_Ea_g-ym=s300",genre:"2D Sandbox",price:"$4.99",rating:"4.6",downloads:"5M+",store:"playstore",id:"com.and.games505.TerrariaPaid"},
+  {rank:7,name:"Minecraft",icon:"https://play-lh.googleusercontent.com/tI4StRSPVhpGJH5R013naszLUawOjao1ya8FvyaNO7XY_cJFHFqo1EFaEJv_7zz3rRJ5lEpLiw14ZqQLCOYc=s300",genre:"Sandbox Survival",price:"$6.99",rating:"4.4",downloads:"50M+",store:"playstore",id:"com.mojang.minecraftpe"},
+  {rank:6,name:"Plague Inc.",icon:"https://play-lh.googleusercontent.com/qLgeusnY6S6JC_qB7s1qz5rPzrzMIuiXDvQN2R9qZhuQb3xTw4adMD0-Ktk12LrLwFB_wn_ftNVvLDsixSBeGQ=s300",genre:"Strategy Simulation",price:"Free",rating:"4.7",downloads:"100M+",store:"playstore",id:"com.miniclip.plagueinc"},
+  {rank:5,name:"Stardew Valley",icon:"https://play-lh.googleusercontent.com/RwIUSwgsFOjwoKAdwCgpajGa6DrS44muStOLe_EIAA4mdzYMHR2N8fd4TbXYKSEVjD9bH63OPo5fFIrHqP_c_A=s300",genre:"Farming Sim",price:"$7.99",rating:"4.7",downloads:"5M+",store:"playstore",id:"com.chucklefish.stardewvalley"},
+  {rank:4,name:"Cat Quest",icon:"https://play-lh.googleusercontent.com/YsP8lNMTkBN4alIAIeD-ovP_g5ywEWyWWS1f6RMkUYXdEGD-pZQVg_QkpKJGdZeKPWGaDeiCBS1hxxsNRRFZ=s300",genre:"Action RPG",price:"Free",rating:"4.4",downloads:"100K+",store:"playstore",id:"com.thegentlebros.catquest"},
+  {rank:3,name:"Dead Cells",icon:"https://play-lh.googleusercontent.com/Mn9NateYFRZQbWnlZvszDPoKZbeuZM2O-Kyn7EKRCZI3D8joecHqytfOx73IyuAwHw=s300",genre:"Roguelike Action",price:"$8.99",rating:"4.9",downloads:"1M+",store:"playstore",id:"com.playdigious.deadcells.mobile"},
+  {rank:2,name:"GTA: Vice City",icon:"https://play-lh.googleusercontent.com/nl1Y6bn06faVBuPEwWh5gInl_Zji3A5wTA4zscKDsJLXpcZ5C35F5zaGzEwCE0bKJ8Jr=s300",genre:"Open World Action",price:"Paid",rating:"3.5",downloads:"1M+",store:"playstore",id:"com.rockstargames.gtavc"},
+  {rank:1,name:"Danganronpa: Trigger Happy Havoc",icon:"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413410/header.jpg",genre:"Murder Mystery Visual Novel (PC/Steam)",price:"$19.99",rating:"95% ★",downloads:"38K+ reviews",store:"steam",id:"413410/Danganronpa_Trigger_Happy_Havoc"},
+];
+
+const grid = document.getElementById('gameGrid');
+const emptyState = document.getElementById('emptyState');
+const resultCount = document.getElementById('resultCount');
+
+function storeLink(game){
+  if(game.store === "steam"){
+    return {url:`https://store.steampowered.com/app/${game.id}/`, label:"Steam पर देखें", cls:"steam"};
+  }
+  return {url:`https://play.google.com/store/apps/details?id=${game.id}`, label:"Play Store पर देखें", cls:""};
+}
+
+function render(list){
+  grid.innerHTML = "";
+  list.forEach(game=>{
+    const link = storeLink(game);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="thumb">
+        <span class="rank mono">#${game.rank}</span>
+        <img src="${game.icon}" alt="${game.name} icon" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+      <div class="card-body">
+        <h3>${game.name}</h3>
+        <div class="genre">${game.genre}</div>
+        <div class="badges">
+          <span class="badge offline">Offline</span>
+          <span class="badge ${game.price === 'Free' ? 'free' : 'paid'}">${game.price}</span>
+          <span class="badge rating">★ ${game.rating}</span>
+        </div>
+        <div class="meta-row"><span>Downloads: ${game.downloads}</span></div>
+        <a class="dl-btn ${link.cls}" href="${link.url}" target="_blank" rel="noopener">${link.label}</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+  resultCount.textContent = list.length;
+  emptyState.style.display = list.length ? 'none' : 'block';
+  grid.style.display = list.length ? 'grid' : 'none';
+}
+
+document.getElementById('searchInput').addEventListener('input', e=>{
+  const q = e.target.value.trim().toLowerCase();
+  const filtered = games.filter(g => g.name.toLowerCase().includes(q) || g.genre.toLowerCase().includes(q));
+  render(filtered);
+});
+
+render(games);
+</script>
+</body>
+</html>
